@@ -1,4 +1,6 @@
 <template>
+  <FullScreenSlider :currentSlide="currentSlide" />
+
   <header class='wrap'>
     <nav>
       <div id='logo'>
@@ -39,8 +41,8 @@
   </header>
 
   <main class='wrap'>
-    <Carousel />
-    <ImageSlider />
+    <Carousel @slideChange='(n) => (currentSlide = n)' />
+    <ImageCards />
 
     <div class="social">
       <a href="#">
@@ -57,8 +59,9 @@
 </template>
 
 <script setup>
+import FullScreenSlider from '@/components/FullScreenSlider.vue'
 import Carousel from '@/components/Carousel.vue'
-import ImageSlider from '@/components/ImageSlider.vue'
+import ImageCards from '@/components/ImageCards.vue'
 import { ref } from 'vue'
 
 const searchOpen = ref(false)
@@ -71,4 +74,6 @@ const toggleSearch = (ev) => {
 }
 
 const menuOpen = ref(false)
+
+const currentSlide = ref(0)
 </script>

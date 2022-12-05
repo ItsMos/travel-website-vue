@@ -27,6 +27,8 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
 
+const emit = defineEmits(['slideChange'])
+
 const currentSlide = ref(0)
 const previousSlide = ref(0)
 const time = 5000
@@ -64,6 +66,7 @@ const slideClass = computed(() => {
 
 function manuallySwitchSlide(to) {
   if (to == currentSlide.value) return
+  emit('slideChange', to)
   previousSlide.value = currentSlide.value
   currentSlide.value = to
   resetInterval()
@@ -79,6 +82,7 @@ function resetInterval() {
     } else {
       currentSlide.value = 0
     }
+    emit('slideChange', currentSlide.value)
   }, time)
 }
 resetInterval()
